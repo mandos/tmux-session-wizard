@@ -1,6 +1,5 @@
 {
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
@@ -19,15 +18,15 @@
           src = self;
           nativeBuildInputs = [ pkgs.makeWrapper ];
           postInstall = ''
-          ls -al $target && \
-            substituteInPlace $target/session-wizard.tmux \
-              --replace  \$CURRENT_DIR/bin/t $target/bin/t
+            substituteInPlace $target/session-wizard.tmux --replace  \$CURRENT_DIR $target
             wrapProgram $target/bin/t \
               --prefix PATH : ${with pkgs; lib.makeBinPath ([ fzf zoxide coreutils gnugrep gnused ])}
           '';
         };
       in
       {
+        packages.default = plugin;
+
         packages.dev = (pkgs.symlinkJoin
           {
             name = "dev-environment";
