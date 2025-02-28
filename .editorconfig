@@ -2,6 +2,6 @@
 indent_style = space
 indent_size = 2
 
-[t]
+[{t,tmux}]
 indent_style = space
 indent_size = 2

@@ -12,6 +12,7 @@ default_width=80
 
 set_default_session_wizard_options() {
   set_tmux_option "@session-wizard" "T"
+  set_tmux_option "@session-wizard-clone" "C-c"
   set_tmux_option "@session-wizard-height" "40"
   set_tmux_option "@session-wizard-width" "80"
   set_tmux_option "@session-wizard-mode" "directory"
@@ -30,6 +31,7 @@ set_session_wizard_options() {
   for key in $(echo "${key_bindings}" | sed 's/ /\n/g'); do
     tmux bind "$key" display-popup -w "$width"% -h "$height"% -E "$CURRENT_DIR/bin/t"
   done
+  tmux bind -N "Clone session and add it to session group" "$(tmux show-option -gqv "@session-wizard-clone")" run-shell "$CURRENT_DIR/bin/t --clone"
 }
 
 function main {

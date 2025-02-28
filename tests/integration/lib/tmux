@@ -1,0 +1,19 @@
+# NOTE: This is work in progress, should be mock of the tmux command
+# echo "tmux $*"
+
+if [ "$1" = "attach" ] || [ "$1" = "switch-client" ]; then
+  echo "Im in attach"
+  while getopts "t:" opt; do
+    case $opt in
+    t)
+      echo "$OPTARG" >"$BATS_TESRT_TMPDIR/attached_session"
+      ;;
+    *) ;;
+    esac
+  done
+  exit 0
+fi
+
+command tmux "$@"
+
+# vim: filetype=bash

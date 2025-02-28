@@ -42,7 +42,7 @@ while getopts "crwhui" opt; do
 done
 
 # Basic command to run tests
-CMD=(bats $FILTER --recursive "$PROJECT_ROOT/tests")
+CMD=(bats $FILTER --recursive "$PROJECT_ROOT/tests/integration")
 
 # Run tests in watch mode
 if [ "$WATCH" = true ]; then
