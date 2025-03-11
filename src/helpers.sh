@@ -75,9 +75,6 @@ log_message() {
   if [ -z "$log_file" ]; then
     return 0
   fi
-
-  echo "LOGFILE: $log_file"
-
   local message="$1"
   local timestamp
   local log_entry
